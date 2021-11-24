@@ -1,14 +1,14 @@
 # Terraform-on-Datadog
 
 ## Monitor
-- Host Monitors from Datadog Agent
+1. Host Monitors from Datadog Agent
     CPU, Memory, Disk Usage
     Log
     Port
     Process
     Agent and VM Status
     URL
-- Azure Monitors activated via Azure Integration
+2. Azure Monitors activated via Azure Integration
     CDN
     Disk IOps
     IoT Hub
@@ -17,7 +17,7 @@
     Azure Databases for PostgreSQL
     SQL MI
     Traffic Manager
-- Synthetics for URL Monitoring
+3. Synthetics for URL Monitoring
     URL API Test
 
 

@@ -8,6 +8,7 @@
     - Process
     - Agent and VM Status
     - URL
+
 2. **Azure Monitors activated via Azure Integration**
     - CDN
     - Disk IOps
@@ -17,16 +18,17 @@
     - Azure Databases for PostgreSQL
     - SQL MI
     - Traffic Manager
+
 3. **Synthetics for URL Monitoring**
     - URL API Test
 ---
 
-### Monitoring Board
+## Monitoring Board
 - Multiple Linux VM
 - Single Windows SQL VM
 ---
 
-### Report Board
+## Report Board
 - Monthly CPU and Memory Usage
 ---
 

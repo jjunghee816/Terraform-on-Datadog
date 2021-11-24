@@ -43,7 +43,7 @@ resource "datadog_monitor" "windows-services" {
   query               = "'windows_service.state'.over('*').by('name','host','windows_service').last(2).count_by_status()"
   notify_no_data      = true
   no_data_timeframe   = 5
-  new_group_delay      = 300
+  new_group_delay     = 300
   require_full_window = false
   include_tags        = false
   message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Service*** : {{windows_service.name}}\n- ***Message*** : {{check_message}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"

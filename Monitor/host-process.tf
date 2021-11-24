@@ -11,6 +11,19 @@ resource "datadog_monitor" "host-process-status" {
   priority            = 1
 }
 
+resource "datadog_monitor" "live-process" {
+  name                = "Apache Process Down on '{{host.name}}({{host.ip}})'"
+  type                = "process alert"
+  query               = "processes('##your_process##').over('host:*').by('host').rollup('count').last('1m') <= 1"
+  notify_no_data      = true
+  no_data_timeframe   = 10
+  new_host_delay      = 300
+  require_full_window = false
+  include_tags        = false
+  message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Process*** : {{process.name}}\n- ***Current Value*** : {{value}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"
+  priority            = 1
+}
+
 resource "datadog_monitor" "host-process-cpu" {
   name                = "Process '{{process_name}}' CPU Percent {{comparator}} {{threshold}} on '{{host.name}}({{host.ip}})'"
   type                = "metric alert"

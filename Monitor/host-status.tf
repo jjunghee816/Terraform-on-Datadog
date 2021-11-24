@@ -4,7 +4,7 @@ resource "datadog_monitor" "host-response" {
   query               = "'datadog.agent.up'.over('*').by('name','host').last(2).count_by_status()"
   notify_no_data      = true
   no_data_timeframe   = 10
-  new_host_delay      = 300
+  new_group_delay     = 300
   require_full_window = false
   include_tags        = false
   message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"
@@ -18,7 +18,7 @@ resource "datadog_monitor" "host-restart" {
   query               = "min(last_1m):avg:system.uptime{*} by {name,host} <= 300"
   notify_no_data      = true
   no_data_timeframe   = 10
-  new_host_delay      = 300
+  new_group_delay     = 300
   require_full_window = false
   include_tags        = false
   message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Current Value*** : {{value}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"

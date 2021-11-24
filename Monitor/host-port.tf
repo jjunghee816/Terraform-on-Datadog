@@ -4,7 +4,7 @@ resource "datadog_monitor" "host-port-metric" {
   query               = "min(last_5m):avg:network.tcp.can_connect{port:*} by {name,host,instance,port} < 1"
   notify_no_data      = true
   no_data_timeframe   = 10
-  new_host_delay      = 300
+  new_group_delay     = 300
   require_full_window = false
   include_tags        = false
   message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Port*** : {{port.name}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"
@@ -17,7 +17,7 @@ resource "datadog_monitor" "host-port-network" {
   query               = "'tcp.can_connect'.over('*').by('name','host','port').last(2).count_by_status()"
   notify_no_data      = true
   no_data_timeframe   = 10
-  new_host_delay      = 300
+  new_group_delay     = 300
   require_full_window = false
   include_tags        = false
   message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Port*** : {{port.name}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"

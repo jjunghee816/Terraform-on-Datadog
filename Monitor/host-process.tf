@@ -4,7 +4,7 @@ resource "datadog_monitor" "host-process-status" {
   query               = "'process.up'.over('*').by('name','host','process').last(2).count_by_status()"
   notify_no_data      = true
   no_data_timeframe   = 10
-  new_host_delay      = 300
+  new_group_delay     = 300
   require_full_window = false
   include_tags        = false
   message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Process*** : {{process.name}}\n- ***Message*** : {{check_message}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"
@@ -17,7 +17,7 @@ resource "datadog_monitor" "live-process" {
   query               = "processes('##your_process##').over('host:*').by('host').rollup('count').last('1m') <= 1"
   notify_no_data      = true
   no_data_timeframe   = 10
-  new_host_delay      = 300
+  new_group_delay     = 300
   require_full_window = false
   include_tags        = false
   message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Process*** : {{process.name}}\n- ***Current Value*** : {{value}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"
@@ -30,7 +30,7 @@ resource "datadog_monitor" "host-process-cpu" {
   query               = "min(last_5m):avg:system.processes.cpu.normalized_pct{process_name:*} by {name,host,process_name} > 80"
   notify_no_data      = true
   no_data_timeframe   = 10
-  new_host_delay      = 300
+  new_group_delay     = 300
   require_full_window = false
   include_tags        = false
   message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Process*** : {{process_name}}\n- ***Current Value*** : {{value}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel_exclude_noc}"
@@ -43,7 +43,7 @@ resource "datadog_monitor" "host-process-memory" {
   query               = "min(last_5m):avg:system.processes.mem.pct{process_name:*} by {name,host,process_name} > 80"
   notify_no_data      = true
   no_data_timeframe   = 10
-  new_host_delay      = 300
+  new_group_delay     = 300
   require_full_window = false
   include_tags        = false
   message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Process*** : {{process_name}}\n- ***Current Value*** : {{value}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel_exclude_noc}"
@@ -56,7 +56,7 @@ resource "datadog_monitor" "windows-services" {
   query               = "'windows_service.state'.over('*').by('name','host','windows_service').last(2).count_by_status()"
   notify_no_data      = true
   no_data_timeframe   = 5
-  new_host_delay      = 300
+  new_group_delay     = 300
   require_full_window = false
   include_tags        = false
   message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Service*** : {{windows_service.name}}\n- ***Message*** : {{check_message}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"

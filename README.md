@@ -2,23 +2,23 @@
 
 ## Monitor
 1. Host Monitors from Datadog Agent
-    CPU, Memory, Disk Usage
-    Log
-    Port
-    Process
-    Agent and VM Status
-    URL
+    - CPU, Memory, Disk Usage
+    - Log
+    - Port
+    - Process
+    - Agent and VM Status
+    - URL
 2. Azure Monitors activated via Azure Integration
-    CDN
-    Disk IOps
-    IoT Hub
-    Load Balancer Health Probe
-    Azure Databases for MySQL
-    Azure Databases for PostgreSQL
-    SQL MI
-    Traffic Manager
+    - CDN
+    - Disk IOps
+    - IoT Hub
+    - Load Balancer Health Probe
+    - Azure Databases for MySQL
+    - Azure Databases for PostgreSQL
+    - SQL MI
+    - Traffic Manager
 3. Synthetics for URL Monitoring
-    URL API Test
+    - URL API Test
 
 
 ### Monitoring Board

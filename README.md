@@ -1,9 +1,11 @@
 # Terraform-on-Datadog
 
-### Contents
+### Index
 
 [1. Monitor](## Monitor)
+
 [2. Monitoring Board](## Monitoring Board)
+
 [3. Report Board](## Report Board)
 ---
 

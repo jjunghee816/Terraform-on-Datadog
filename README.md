@@ -1,12 +1,9 @@
 # Terraform-on-Datadog
 
 ### Index
-
-[1. Monitor](## Monitor)
-
-[2. Monitoring Board](## Monitoring Board)
-
-[3. Report Board](## Report Board)
+[1. Monitor](https://github.com/jjunghee816/Terraform-on-Datadog#monitor)
+[2. Monitoring Board](https://github.com/jjunghee816/Terraform-on-Datadog#monitoring-board)
+[3. Report Board](https://github.com/jjunghee816/Terraform-on-Datadog#report-board)
 ---
 
 ## Monitor

@@ -1,5 +1,5 @@
 resource "datadog_monitor" "host-log" {
-  name                = "String on '{{host.name}}({{host.ip}})'"
+  name                = "##Search_String## on '{{host.name}}({{host.ip}})'"
   type                = "log alert"
   query               = "logs(\"##search_string##\").index(\"*\").rollup(\"count\").by(\"name\",\"host\").last(\"5m\") > 0"
   enable_logs_sample  = true

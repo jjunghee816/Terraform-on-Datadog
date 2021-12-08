@@ -4,7 +4,7 @@ resource "datadog_synthetics_test" "test_ssl" {
     subtype = "ssl"
     request_definition {
         host = "${element(var.url_host, count.index)}"
-        port = "${ssl_port}"
+        port = "${var.ssl_port}"
     }
     assertion {
         type     = "certificate"

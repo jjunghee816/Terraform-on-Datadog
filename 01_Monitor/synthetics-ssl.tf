@@ -16,7 +16,10 @@ resource "datadog_synthetics_test" "test_ssl" {
         operator = "lessThan"
         target   = "3000"
     }
-    locations = ["aws:ap-northeast-2"]
+    locations = [
+        "aws:ap-northeast-2",
+        "##Location you want to monitor##",
+    ]
     options_list {
         tick_every = 60
         accept_self_signed = true

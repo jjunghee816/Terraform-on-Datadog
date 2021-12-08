@@ -31,11 +31,16 @@
 
 ## Monitoring Board
 - Multiple Linux VM
+    ![Multiple Linux VM](https://github.com/jjunghee816/Terraform-on-Datadog/blob/main/images/monitoring_multiple_linux.png)
 - Single Windows SQL VM
+    ![Single Windows SQL VM](https://github.com/jjunghee816/Terraform-on-Datadog/blob/main/images/monitoring_single_windows.png)
 ---
 
 ## Report Board
-- Monthly CPU and Memory Usage
+- Monthly VM and Azure Databases for MySQL Usage
+    ![VM and MySQL Usage](https://github.com/jjunghee816/Terraform-on-Datadog/blob/main/images/report_vm_azuresql.png)
+- Monthly VM and AzureSQL Usage
+    ![VM and AzureSQL Usage](https://github.com/jjunghee816/Terraform-on-Datadog/blob/main/images/report_vm_mysql.png)
 ---
 
 ### Docs and Reference

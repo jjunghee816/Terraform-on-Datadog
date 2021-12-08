@@ -1,16 +1,3 @@
-resource "datadog_monitor" "host-process-status" {
-  name                = "Process '{{process.name}}' Down on '{{host.name}}({{host.ip}})'"
-  type                = "service check"
-  query               = "'process.up'.over('*').by('name','host','process').last(2).count_by_status()"
-  notify_no_data      = true
-  no_data_timeframe   = 10
-  new_group_delay     = 300
-  require_full_window = false
-  include_tags        = false
-  message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Process*** : {{process.name}}\n- ***Message*** : {{check_message}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"
-  priority            = 1
-}
-
 resource "datadog_monitor" "host-process-cpu" {
   name                = "Process '{{process_name}}' CPU Percent {{comparator}} {{threshold}} on '{{host.name}}({{host.ip}})'"
   type                = "metric alert"
@@ -37,15 +24,14 @@ resource "datadog_monitor" "host-process-memory" {
   priority            = 2
 }
 
-resource "datadog_monitor" "windows-services" {
-  name                = "Windows Service '{{windows_service.name}}' Down on '{{name.name}}({{host.ip}})'"
-  type                = "service check"
-  query               = "'windows_service.state'.over('*').by('name','host','windows_service').last(2).count_by_status()"
+resource "datadog_monitor" "host-disk-device" {
+  name                = "Disk '{{device.name}}' Percent {{comparator}} {{threshold}} on '{{host.name}}({{host.ip}})'"
+  type                = "metric alert"
+  query               = "avg(last_3m):avg:system.disk.in_use{device:/dev/s* OR device:*: OR device://*} by {name,host,device} * 100 >= 90"
   notify_no_data      = true
-  no_data_timeframe   = 5
-  new_group_delay     = 300
+  no_data_timeframe   = 10
   require_full_window = false
   include_tags        = false
-  message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Service*** : {{windows_service.name}}\n- ***Message*** : {{check_message}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"
-  priority            = 1
+  message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Disk*** : {{device.name}}\n- ***Current Value*** : {{value}}\n- ***Last*** : {{last_triggered_at}}{{{{raw}}}}(UTC){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"
+  priority            = 2
 }

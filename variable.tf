@@ -22,6 +22,16 @@ variable "url_address" {
     sensitive   = true
 }
 
+variable "url_host" {
+    type        = list
+    sensitive   = true
+}
+
+variable "ssl_port" {
+    type        = number
+    sensitive   = true
+}
+
 variable "tag" {
     type        = string
 }

@@ -7,4 +7,10 @@ url_address=[
         "##URL_Address_2##", 
         "##URL_Address_3##"
         ]
+url_host=[
+        "##URL_Address_only_host_1##", 
+        "##URL_Address_only_host_2##", 
+        "##URL_Address_only_host_3##"
+        ]
+ssl_port=##Your_SSL_port##
 tag="##Your_Tag##"

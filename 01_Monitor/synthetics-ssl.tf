@@ -31,8 +31,8 @@ resource "datadog_synthetics_test" "test_ssl" {
         renotify_interval = 100
         }
     }
-    name    = "SSL Expires in 30 Days on '${element(var.url_name, count.index)}'"
-    message = "- ***URL*** : [${element(var.url_name, count.index)}](${element(var.url_address, count.index)})\n- ***Port*** : ${(var.ssl_port)}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"
+    name    = "SSL Expires in 30 Days on '${element(var.url_host, count.index)}'"
+    message = "- ***Domain*** : ${element(var.url_host, count.index)}\n- ***Port*** : ${(var.ssl_port)}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"
     tags    = ["${var.tag}"]
     
     status = "live"

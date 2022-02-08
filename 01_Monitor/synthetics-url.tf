@@ -18,7 +18,7 @@ resource "datadog_synthetics_test" "synthetics_url" {
     }
     locations = [
         "aws:ap-northeast-2",
-        "azure:eastus"
+        "azure:eastus",
         "##Location you want to monitor##"
         ]
     options_list {

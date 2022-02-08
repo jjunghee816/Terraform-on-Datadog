@@ -18,7 +18,8 @@ resource "datadog_synthetics_test" "test_ssl" {
     }
     locations = [
         "aws:ap-northeast-2",
-        "##Location you want to monitor##",
+        "azure:eastus",
+        "##Location you want to monitor##"
     ]
     options_list {
         tick_every = 60

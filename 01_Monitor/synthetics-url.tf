@@ -18,17 +18,20 @@ resource "datadog_synthetics_test" "synthetics_url" {
     }
     locations = [
         "aws:ap-northeast-2",
-        "##Location you want to monitor##",
-    ]
+        "azure:eastus"
+        "##Location you want to monitor##"
+        ]
     options_list {
         tick_every = 60
         retry {
         count    = 3
-        interval = 300
+        interval = 1500
         }
         monitor_options {
         renotify_interval = 100
         }
+        min_failure_duration = 50
+        min_location_failed = 2
     }
     name    = "URL Check on '${element(var.url_name, count.index)}'"
     message = "- ***URL*** : [${element(var.url_name, count.index)}](${element(var.url_address, count.index)})\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"

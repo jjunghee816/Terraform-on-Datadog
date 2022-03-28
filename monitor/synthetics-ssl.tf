@@ -1,4 +1,4 @@
-resource "datadog_synthetics_test" "test_ssl" {
+resource "datadog_synthetics_test" "synthetics-ssl" {
     count        = "${length(var.url_host)}"
     type         = "api"
     subtype      = "ssl"

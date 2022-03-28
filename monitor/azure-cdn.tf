@@ -1,5 +1,5 @@
-resource "datadog_monitor" "azure-frontdoor" {
-  name                = "CDN Profile Downgraded on '{{name.name}}'"
+resource "datadog_monitor" "azure-cdn-profile" {
+  name                = "CDN Profile Degraded on '{{name.name}}'"
   type                = "metric alert"
   query               = "max(last_5m):avg:azure.cdn_profiles.status{*} by {name} < 1"
   notify_no_data      = true
@@ -11,8 +11,8 @@ resource "datadog_monitor" "azure-frontdoor" {
   priority            = 1
 }
 
-resource "datadog_monitor" "azure-frontdoor-endpoint" {
-  name                = "CDN Endpoint Downgraded on '{{name.name}}'"
+resource "datadog_monitor" "azure-cdn-endpoint" {
+  name                = "CDN Endpoint Degraded on '{{name.name}}'"
   type                = "metric alert"
   query               = "max(last_5m):avg:azure.cdn_profiles_endpoints.count{*} by {name} < 1"
   notify_no_data      = true

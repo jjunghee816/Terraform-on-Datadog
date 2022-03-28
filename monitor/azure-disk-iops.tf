@@ -1,4 +1,4 @@
-resource "datadog_monitor" "host-disk-queue" {
+resource "datadog_monitor" "azure-disk-queue" {
   name                = "OS Disk IOps Consumed Percent {{comparator}} {{threshold}} on '{{host.name}}({{host.ip}})'"
   type                = "metric alert"
   query               = "min(last_5m):avg:azure.vm.os_disk_iops_consumed_percentage{*} by {name,host} > 80"

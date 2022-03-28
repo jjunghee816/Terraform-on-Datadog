@@ -1,4 +1,4 @@
-resource "datadog_monitor" "azure-trafficmanager" {
+resource "datadog_monitor" "azure-trafficmanager-status" {
   name                = "TrafficManager Endpoint Status Downgraded on '{{name.name}}'"
   type                = "metric alert"
   query               = "max(last_5m):avg:azure.network_trafficmanagerprofiles.probe_agent_current_endpoint_state_by_profile_resource_id{name:*} by {name} < 1"

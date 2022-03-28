@@ -1,4 +1,4 @@
-resource "datadog_monitor" "azure-iothub-messages" {
+resource "datadog_monitor" "azure-iothub-message" {
   name                = "IoT Hub Total Messages {{comparator}} {{threshold}} on '{{name.name}}'"
   type                = "metric alert"
   query               = "max(last_5m):avg:azure.devices_iothubs.total_number_of_messages_used{*} by {name} / 400000 * 100 >= 70"

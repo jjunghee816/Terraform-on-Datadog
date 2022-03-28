@@ -1,4 +1,4 @@
-resource "datadog_synthetics_test" "synthetics_url" {
+resource "datadog_synthetics_test" "synthetics-url" {
     count   = "${length(var.url_name)}"
     type    = "api"
     subtype = "http"

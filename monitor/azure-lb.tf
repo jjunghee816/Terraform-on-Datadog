@@ -1,7 +1,7 @@
 resource "datadog_monitor" "azure-lb-health" {
   name                = "LB Health Probe {{comparator}} {{threshold}} on '{{name.name}}'"
   type                = "metric alert"
-  query               = "max(last_5m):avg:azure.network_loadbalancers.health_probe_status{name:*} by {name,frontendipaddress,frontendport,backendipaddress,backendport} < 50"
+  query               = "max(last_5m):avg:azure.network_loadbalancers.health_probe_status{name:*} by {name,frontendipaddress,frontendport,backendipaddress,backendport,resource_group} < 50"
   notify_no_data      = true
   no_data_timeframe   = 10
   evaluation_delay    = 0

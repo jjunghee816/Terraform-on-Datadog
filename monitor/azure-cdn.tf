@@ -1,7 +1,7 @@
 resource "datadog_monitor" "azure-cdn-profile" {
   name                = "CDN Profile Degraded on '{{name.name}}'"
   type                = "metric alert"
-  query               = "max(last_5m):avg:azure.cdn_profiles.status{*} by {name} < 1"
+  query               = "max(last_5m):avg:azure.cdn_profiles.status{*} by {name,resource_group} < 1"
   notify_no_data      = true
   no_data_timeframe   = 10
   evaluation_delay    = 0
@@ -14,7 +14,7 @@ resource "datadog_monitor" "azure-cdn-profile" {
 resource "datadog_monitor" "azure-cdn-endpoint" {
   name                = "CDN Endpoint Degraded on '{{name.name}}'"
   type                = "metric alert"
-  query               = "max(last_5m):avg:azure.cdn_profiles_endpoints.count{*} by {name} < 1"
+  query               = "max(last_5m):avg:azure.cdn_profiles_endpoints.count{*} by {name,resource_group} < 1"
   notify_no_data      = true
   no_data_timeframe   = 10
   evaluation_delay    = 0

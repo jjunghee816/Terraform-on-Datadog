@@ -12,7 +12,7 @@ resource "datadog_monitor" "host-process-status" {
 }
 
 resource "datadog_monitor" "live-process" {
-  name                = "Apache Process Down on '{{host.name}}({{host.ip}})'"
+  name                = "##Your_Process## Process Down on '{{host.name}}({{host.ip}})'"
   type                = "process alert"
   query               = "processes('##your_process##').over('host:*').by('host').rollup('count').last('1m') <= 1"
   notify_no_data      = true

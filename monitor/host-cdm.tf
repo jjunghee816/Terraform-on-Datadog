@@ -24,7 +24,6 @@ resource "datadog_monitor" "host-memory" {
   priority            = 2
 }
 
-
 resource "datadog_monitor" "host-disk-device" {
   name                = "Disk '{{device.name}}' Percent {{comparator}} {{threshold}} on '{{host.name}}({{host.ip}})'"
   type                = "metric alert"
@@ -38,14 +37,14 @@ resource "datadog_monitor" "host-disk-device" {
 }
 
 resource "datadog_monitor" "host-disk-forecast" {
-  name                = "Disk '{{device.name}}' Percent {{comparator}} {{threshold}} on '{{host.name}}({{host.ip}})' within the next 1 week"
-  type                = "metric alert"
-  query               = "max(next_1w):forecast(system.disk.in_use{device:/dev/s* OR device:*: OR device://*} by {name} * 100, 'seasonal', 1, interval='60m', seasonality='weekly', timezone='asia/seoul') >= 85"
-  notify_no_data      = true
-  no_data_timeframe   = 10
-  include_tags        = false
-  message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Disk*** : {{device.name}}\n- ***Current Value*** : {{value}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"
-  priority            = 2
+  name              = "Disk '{{device.name}}' Percent {{comparator}} {{threshold}} on '{{host.name}}({{host.ip}})' within the next 1 week"
+  type              = "metric alert"
+  query             = "max(next_1w):forecast(system.disk.in_use{device:/dev/s* OR device:*: OR device://*} by {name} * 100, 'seasonal', 1, interval='60m', seasonality='weekly', timezone='asia/seoul') >= 85"
+  notify_no_data    = true
+  no_data_timeframe = 10
+  include_tags      = false
+  message           = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Disk*** : {{device.name}}\n- ***Current Value*** : {{value}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"
+  priority          = 2
 }
 
 resource "datadog_monitor" "azure-disk-queue" {

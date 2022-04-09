@@ -37,3 +37,16 @@ resource "datadog_monitor" "host-ping" {
   message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Current Value*** : {{value}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"
   priority            = 1
 }
+
+resource "datadog_monitor" "host-network" {
+  name                = "TCP Not Connected on '{{host.name}}({{host.ip}})'"
+  type                = "metric alert"
+  query               = "min(last_1m):avg:network.tcp.can_connect{*} by {name,host,instance,port} < 1"
+  notify_no_data      = true
+  no_data_timeframe   = 10
+  new_group_delay     = 300
+  require_full_window = false
+  include_tags        = false
+  message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Instance*** : {{instance.name}}\n- ***Port*** : {{port.name}}\n- ***Current Value*** : {{value}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"
+  priority            = 1
+}

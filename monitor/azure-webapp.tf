@@ -1,10 +1,7 @@
-
-kr_app_service_disk_usage.gauge{*}
-
-resource "datadog_monitor" "azure-app-http5xx" {
-  name                = "App Service Plan CPU Percent {{comparator}} {{threshold}} on '{{name.name}}'"
+resource "datadog_monitor" "azure-webplan-status" {
+  name                = "WebApp Service Plan Status Degraded on '{{name.name}}'"
   type                = "metric alert"
-  query               = "sum(last_5m):avg:azure.app_services.http5xx{*} by {name,resource_group}.as_count() > 10"
+  query               = "avg(last_5m):avg:azure.web_serverfarms.status{*} by {name,resource_group} < 1"
   notify_no_data      = true
   no_data_timeframe   = 10
   evaluation_delay    = 0
@@ -14,9 +11,8 @@ resource "datadog_monitor" "azure-app-http5xx" {
   priority            = 2
 }
 
-
 resource "datadog_monitor" "azure-webplan-cpu" {
-  name                = "App Service Plan CPU Percent {{comparator}} {{threshold}} on '{{name.name}}'"
+  name                = "WebApp Service Plan CPU Percent {{comparator}} {{threshold}} on '{{name.name}}'"
   type                = "metric alert"
   query               = "avg(last_5m):avg:azure.web_serverfarms.cpu_percentage{*} by {name,resource_group} > 80"
   notify_no_data      = true
@@ -29,7 +25,7 @@ resource "datadog_monitor" "azure-webplan-cpu" {
 }
 
 resource "datadog_monitor" "azure-webplan-memory" {
-  name                = "App Service Plan Memory Percent {{comparator}} {{threshold}} on '{{name.name}}'"
+  name                = "WebApp Service Plan Memory Percent {{comparator}} {{threshold}} on '{{name.name}}'"
   type                = "metric alert"
   query               = "avg(last_5m):avg:azure.web_serverfarms.memory_percentage{*} by {name,resource_group} > 80"
   notify_no_data      = true

@@ -13,8 +13,18 @@ variable "noti_channel" {
   sensitive = true
 }
 
-variable "url" {
-  type = map(string)
+variable "url_name" {
+  type = list(any)
+}
+
+variable "url_address" {
+  type      = list(any)
+  sensitive = true
+}
+
+variable "url_host" {
+  type      = list(any)
+  sensitive = true
 }
 
 variable "ssl_port" {

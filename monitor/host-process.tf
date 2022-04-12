@@ -14,7 +14,7 @@ resource "datadog_monitor" "host-process-status" {
 resource "datadog_monitor" "live-process" {
   name                = "##Your_Process## Process Down on '{{host.name}}({{host.ip}})'"
   type                = "process alert"
-  query               = "processes('##your_process##').over('host:*').by('host','command').rollup('count').last('5m') < 1"
+  query               = "processes('##your_process##').over('command:##process_name##').by('host').rollup('count').last('5m') < 1"
   notify_no_data      = true
   no_data_timeframe   = 10
   new_group_delay     = 300

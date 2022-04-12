@@ -1,5 +1,5 @@
 resource "datadog_monitor" "azure-lb-status" {
-  name                = "LB Status Degraded {{threshold}} on '{{name.name}}'"
+  name                = "LB Status Degraded on '{{name.name}}'"
   type                = "metric alert"
   query               = "max(last_5m):avg:azure.network_loadbalancers.status{*} by {name,resource_group} < 1"
   notify_no_data      = true

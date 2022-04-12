@@ -1,7 +1,7 @@
 resource "datadog_monitor" "host-port-metric" {
   name                = "Port {{port.name}} Down on '{{host.name}}({{host.ip}})'"
   type                = "metric alert"
-  query               = "min(last_5m):avg:network.tcp.can_connect{port:*} by {name,host,instance,port} < 1"
+  query               = "min(last_5m):avg:network.tcp.can_connect{*} by {name,host,instance,port} < 1"
   notify_no_data      = true
   no_data_timeframe   = 10
   new_group_delay     = 300

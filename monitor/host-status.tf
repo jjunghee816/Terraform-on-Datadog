@@ -11,7 +11,6 @@ resource "datadog_monitor" "host-status" {
   priority            = 1
 }
 
-
 resource "datadog_monitor" "host-restart" {
   name                = "Server Restart on '{{host.name}}({{host.ip}})'"
   type                = "metric alert"

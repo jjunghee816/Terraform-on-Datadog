@@ -46,7 +46,7 @@ resource "datadog_monitor" "host-disk" {
   new_group_delay     = 60
   require_full_window = false
   include_tags        = false
-  message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Disk*** : {{device.name}}\n- ***Current Value*** : {{value}}\n- ***Last*** : {{last_triggered_at}}{{{{raw}}}}(UTC){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel_exclude_noc}"
+  message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Disk*** : {{device.name}}\n- ***Current Value*** : {{value}}\n- ***Last*** : {{last_triggered_at}}{{{{raw}}}}(UTC){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"
   priority            = 2
 }
 
@@ -59,7 +59,7 @@ resource "datadog_monitor" "host-disk-forecast" {
   new_group_delay     = 60
   require_full_window = false
   include_tags        = false
-  message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Disk*** : {{device.name}}\n- ***Current Value*** : {{value}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel_exclude_noc}"
+  message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Disk*** : {{device.name}}\n- ***Current Value*** : {{value}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"
   priority            = 2
 }
 

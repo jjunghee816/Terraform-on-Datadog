@@ -33,7 +33,7 @@ resource "datadog_monitor" "host-process-cpu" {
   new_group_delay     = 300
   require_full_window = false
   include_tags        = false
-  message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Process*** : {{process_name}}\n- ***Current Value*** : {{value}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel_exclude_noc}"
+  message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Process*** : {{process_name}}\n- ***Current Value*** : {{value}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"
   priority            = 2
 }
 
@@ -46,7 +46,7 @@ resource "datadog_monitor" "host-process-memory" {
   new_group_delay     = 300
   require_full_window = false
   include_tags        = false
-  message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Process*** : {{process_name}}\n- ***Current Value*** : {{value}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel_exclude_noc}"
+  message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Process*** : {{process_name}}\n- ***Current Value*** : {{value}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"
   priority            = 2
 }
 

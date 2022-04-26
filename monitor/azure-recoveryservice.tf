@@ -1,20 +1,7 @@
-resource "datadog_monitor" "azure-sqlmi-status" {
-  name                = "SQL MI Status Degraded on '({{name.name}})'"
+resource "datadog_monitor" "azure-rsv-status" {
+  name                = "RSV Status Degraded on '{{name.name}}'"
   type                = "metric alert"
-  query               = "max(last_15m):avg:azure.sql_managedinstances.status{*} by {name,type,resource_group} < 1"
-  notify_no_data      = true
-  no_data_timeframe   = 0
-  evaluation_delay    = 0
-  require_full_window = false
-  include_tags        = false
-  message             = "- ***Target*** : {{name.name}}\n- ***Current Value*** : {{value}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}{{#is_alert_recovery}}\n- ***Duration*** : {{triggered_duration_sec}}{{/is_alert_recovery}}\n- ***Notification Channel*** : \n${var.noti_channel}"
-  priority            = 2
-}
-
-resource "datadog_monitor" "azure-sqlmi-cpu" {
-  name                = "SQL MI CPU Percent {{comparator}} {{threshold}} on '{{name.name}}'"
-  type                = "metric alert"
-  query               = "avg(last_5m):avg:azure.sql_managedinstances.avg_cpu_percent {*} by {name,resource_group} >= 80"
+  query               = "min(last_5m):avg:azure.recoveryservices_vaults.status{*} by {name,resource_group} < 1"
   notify_no_data      = true
   no_data_timeframe   = 10
   evaluation_delay    = 0
@@ -24,11 +11,24 @@ resource "datadog_monitor" "azure-sqlmi-cpu" {
   priority            = 2
 }
 
-resource "datadog_monitor" "azure-sqlmi-storage" {
-  name                = "SQL MI Storage Percent {{comparator}} {{threshold}} on '{{name.name}}'"
+resource "datadog_monitor" "azure-rsv-backup" {
+  name                = "RSV Backup Triggered on '{{name.name}}'"
   type                = "metric alert"
-  query               = "max(last_5m):avg:azure.sql_managedinstances.storage_space_used_mb{*} by {name,type,resource_group} / avg:azure.sql_managedinstances.reserved_storage_mb{*} by {name,type,resource_group} * 100 >= 60"
-  notify_no_data      = true
+  query               = "min(last_5m):avg:azure.recoveryservices_vaults.backup_health_event{*} by {name,resource_group} > 0"
+  notify_no_data      = false
+  no_data_timeframe   = 10
+  evaluation_delay    = 0
+  require_full_window = false
+  include_tags        = false
+  message             = "- ***Target*** : {{name.name}}\n- ***Current Value*** : {{value}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}{{#is_alert_recovery}}\n- ***Duration*** : {{triggered_duration_sec}}{{/is_alert_recovery}}\n- ***Notification Channel*** : \n${var.noti_channel}"
+  priority            = 2
+}
+
+resource "datadog_monitor" "azure-rsv-restore" {
+  name                = "RSV Restore Triggered on '{{name.name}}'"
+  type                = "metric alert"
+  query               = "min(last_5m):avg:azure.recoveryservices_vaults.restore_health_event{*} by {name,resource_group} > 0"
+  notify_no_data      = false
   no_data_timeframe   = 10
   evaluation_delay    = 0
   require_full_window = false

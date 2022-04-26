@@ -33,7 +33,7 @@ resource "datadog_synthetics_test" "synthetics-ssl-count" {
     }
   }
   name    = "SSL Expires in 30 Days on '${element(var.url_host, count.index)}'"
-  message = "- ***Domain*** : ${element(var.url_host, count.index)}\n- ***Port*** : ${(var.ssl_port)}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"
+  message = "- ***Domain*** : ${element(var.url_host, count.index)}\n- ***Port*** : ${(var.ssl_port)}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}{{#is_alert_recovery}}\n- ***Duration*** : {{triggered_duration_sec}}{{/is_alert_recovery}}\n- ***Notification Channel*** : \n${var.noti_channel}"
   tags    = ["${var.tag}"]
 
   status = "live"
@@ -75,7 +75,7 @@ resource "datadog_synthetics_test" "synthetics-ssl-foreach" {
     min_location_failed  = 2
   }
   name    = "SSL Expires in 30 Days on '${each.key}'"
-  message = "- ***Domain*** : ${substr(replace(each.value, "##string##", ""), 8, -1)}\n- ***Port*** : ${(var.ssl_port)}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"
+  message = "- ***Domain*** : ${substr(replace(each.value, "##string##", ""), 8, -1)}\n- ***Port*** : ${(var.ssl_port)}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}{{#is_alert_recovery}}\n- ***Duration*** : {{triggered_duration_sec}}{{/is_alert_recovery}}\n- ***Notification Channel*** : \n${var.noti_channel}"
   tags    = ["${var.tag}"]
   status  = "live"
 }

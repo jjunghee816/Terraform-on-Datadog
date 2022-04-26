@@ -7,12 +7,12 @@ resource "datadog_monitor" "azure-function-status" {
   evaluation_delay    = 0
   require_full_window = false
   include_tags        = false
-  message             = "- ***Target*** : {{name.name}}\n- ***Current Value*** : {{value}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"
+  message             = "- ***Target*** : {{name.name}}\n- ***Current Value*** : {{value}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}{{#is_alert_recovery}}\n- ***Duration*** : {{triggered_duration_sec}}{{/is_alert_recovery}}\n- ***Notification Channel*** : \n${var.noti_channel}"
   priority            = 2
 }
 
 resource "datadog_monitor" "azure-function-http5xx" {
-  name                = "Function App HTTP 500 Error {{comparator}} {{threshold}} on '{{name.name}}'"
+  name                = "Function App HTTP 500 Errors {{comparator}} {{threshold}} on '{{name.name}}'"
   type                = "metric alert"
   query               = "sum(last_5m):avg:azure.functions.http5xx{*} by {name,resource_group}.as_count() > 10"
   notify_no_data      = true
@@ -20,6 +20,6 @@ resource "datadog_monitor" "azure-function-http5xx" {
   evaluation_delay    = 0
   require_full_window = false
   include_tags        = false
-  message             = "- ***Target*** : {{name.name}}\n- ***Current Value*** : {{value}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}\n- ***Notification Channel*** : \n${var.noti_channel}"
+  message             = "- ***Target*** : {{name.name}}\n- ***Current Value*** : {{value}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}{{#is_alert_recovery}}\n- ***Duration*** : {{triggered_duration_sec}}{{/is_alert_recovery}}\n- ***Notification Channel*** : \n${var.noti_channel}"
   priority            = 2
 }

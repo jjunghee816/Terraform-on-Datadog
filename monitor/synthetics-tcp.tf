@@ -31,7 +31,7 @@ resource "datadog_synthetics_test" "synthetics-tcp" {
     min_location_failed  = 3
   }
   name    = "TCP Port Check on '${each.value.ip}:${each.value.port}'"
-  message = "- ***URL*** : ${each.value.ip}\n- ***Port*** : ${each.value.port}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}{{#is_alert_recovery}}\n- ***Duration*** : {{triggered_duration_sec}}{{/is_alert_recovery}}\n- ***Notification Channel*** : \n${var.noti_channel}"
+  message = "- ***URL*** : ${each.value.ip}\n- ***Port*** : ${each.value.port}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}{{#is_alert_recovery}}\n- ***Duration*** : {{triggered_duration_sec}}{{{{raw}}}} seconds{{{{/raw}}}}{{/is_alert_recovery}}\n- ***Notification Channel*** : \n${var.noti_channel}"
   tags    = ["${var.tag}"]
   status  = "live"
 }

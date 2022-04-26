@@ -7,7 +7,7 @@ resource "datadog_monitor" "host-port-metric" {
   new_group_delay     = 300
   require_full_window = false
   include_tags        = false
-  message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Port*** : {{port.name}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}{{#is_alert_recovery}}\n- ***Duration*** : {{triggered_duration_sec}}{{/is_alert_recovery}}\n- ***Notification Channel*** : \n${var.noti_channel}"
+  message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Port*** : {{port.name}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}{{#is_alert_recovery}}\n- ***Duration*** : {{triggered_duration_sec}}{{{{raw}}}} seconds{{{{/raw}}}}{{/is_alert_recovery}}\n- ***Notification Channel*** : \n${var.noti_channel}"
   priority            = 1
 }
 
@@ -20,6 +20,6 @@ resource "datadog_monitor" "host-port-network" {
   new_group_delay     = 300
   require_full_window = false
   include_tags        = false
-  message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Port*** : {{port.name}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}{{#is_alert_recovery}}\n- ***Duration*** : {{triggered_duration_sec}}{{/is_alert_recovery}}\n- ***Notification Channel*** : \n${var.noti_channel}"
+  message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***Port*** : {{port.name}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}{{#is_alert_recovery}}\n- ***Duration*** : {{triggered_duration_sec}}{{{{raw}}}} seconds{{{{/raw}}}}{{/is_alert_recovery}}\n- ***Notification Channel*** : \n${var.noti_channel}"
   priority            = 1
 }

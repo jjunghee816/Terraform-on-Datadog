@@ -34,7 +34,7 @@ resource "datadog_synthetics_test" "synthetics-url-status-count" {
     min_location_failed  = 2
   }
   name    = "URL Check on '${element(var.url_name, count.index)}'"
-  message = "- ***URL*** : [${element(var.url_name, count.index)}](${element(var.url_address, count.index)})\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}{{#is_alert_recovery}}\n- ***Duration*** : {{triggered_duration_sec}}{{/is_alert_recovery}}\n- ***Notification Channel*** : \n${var.noti_channel}"
+  message = "- ***URL*** : [${element(var.url_name, count.index)}](${element(var.url_address, count.index)})\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}{{#is_alert_recovery}}\n- ***Duration*** : {{triggered_duration_sec}}{{{{raw}}}} seconds{{{{/raw}}}}{{/is_alert_recovery}}\n- ***Notification Channel*** : \n${var.noti_channel}"
   tags    = ["${var.tag}"]
   status  = "live"
 }
@@ -74,7 +74,7 @@ resource "datadog_synthetics_test" "synthetics-url-status-foreach" {
     min_location_failed  = 2
   }
   name    = "URL Check on '${each.key}'"
-  message = "- ***URL*** : [${each.key}](${each.value})\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}{{#is_alert_recovery}}\n- ***Duration*** : {{triggered_duration_sec}}{{/is_alert_recovery}}\n- ***Notification Channel*** : \n${var.noti_channel}"
+  message = "- ***URL*** : [${each.key}](${each.value})\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}{{#is_alert_recovery}}\n- ***Duration*** : {{triggered_duration_sec}}{{{{raw}}}} seconds{{{{/raw}}}}{{/is_alert_recovery}}\n- ***Notification Channel*** : \n${var.noti_channel}"
   tags    = ["${var.tag}"]
   status  = "live"
 }

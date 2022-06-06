@@ -22,7 +22,7 @@ resource "datadog_monitor" "host-url-network" {
   priority            = 2
 }
 
-resource "datadog_monitor" "host-ssl-network" {
+resource "datadog_monitor" "host-ssl-now" {
   name                = "URL '{{instance.name}}' SSL Expires on '{{host.name}}({{host.ip}})'"
   type                = "service check"
   query               = "'http.ssl_cert'.over('*').by('host','instance','url').last(2).count_by_status()"
@@ -34,7 +34,7 @@ resource "datadog_monitor" "host-ssl-network" {
   priority            = 2
 }
 
-resource "datadog_monitor" "host-ssl" {
+resource "datadog_monitor" "host-ssl-30" {
   name                = "URL '{{instance.name}}' SSL Expires in 30 Days on '{{host.name}}({{host.ip}})'"
   type                = "metric alert"
   query               = "avg(last_1d):avg:http.ssl.days_left{*} by {host,instance,url} < 30"

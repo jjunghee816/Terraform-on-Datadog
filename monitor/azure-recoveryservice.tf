@@ -12,9 +12,9 @@ resource "datadog_monitor" "azure-rsv-status" {
 }
 
 resource "datadog_monitor" "azure-rsv-backup" {
-  name                = "RSV Backup Triggered on '{{name.name}}'"
+  name                = "RSV Backup Failed on '{{name.name}}'"
   type                = "metric alert"
-  query               = "min(last_5m):avg:azure.recoveryservices_vaults.backup_health_event{*} by {name,resource_group} > 0"
+  query               = "min(last_1d):avg:azure.recoveryservices_vaults.backup_health_event{healthstatus:healthy} by {name,backupinstancename,resource_group} < 1"
   notify_no_data      = false
   no_data_timeframe   = 10
   evaluation_delay    = 0

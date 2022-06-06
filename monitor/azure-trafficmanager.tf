@@ -27,7 +27,7 @@ resource "datadog_monitor" "azure-tm-profile-status" {
 resource "datadog_monitor" "azure-tm-endpoint-status" {
   name                = "TrafficManager Endpoint Status Degraded on '{{name.name}}'"
   type                = "metric alert"
-  query               = "min(last_5m):avg:azure.network_trafficmanagerprofiles.probe_agent_current_endpoint_state_by_profile_resource_id{!name:tm-s1tops-prd-krc-p*} by {name,endpointname,resource_group} < 1"
+  query               = "min(last_5m):avg:azure.network_trafficmanagerprofiles.probe_agent_current_endpoint_state_by_profile_resource_id{*} by {name,endpointname,resource_group} < 1"
   notify_no_data      = true
   no_data_timeframe   = 10
   evaluation_delay    = 0

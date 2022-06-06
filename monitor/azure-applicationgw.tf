@@ -1,7 +1,7 @@
 resource "datadog_monitor" "azure-agw-status" {
   name                = "Application GW Unhealthy Hosts {{threshold}} on '{{name.name}}"
   type                = "metric alert"
-  query               = "min(last_5m):avg:azure.network_applicationgateways.unhealthy_host_count{*} by {name,backendsettingspool,resource_group} > 1"
+  query               = "max(last_5m):avg:azure.network_applicationgateways.unhealthy_host_count{*} by {name,backendsettingspool,resource_group} < 1"
   notify_no_data      = true
   no_data_timeframe   = 10
   evaluation_delay    = 0

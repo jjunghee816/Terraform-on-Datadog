@@ -6,7 +6,7 @@ resource "datadog_monitor" "host-url-metric" {
   no_data_timeframe   = 10
   require_full_window = true
   include_tags        = false
-  message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***URL*** : {{instance.name}}({{url.name}}){{#is_alert}}\n- ***Message*** : {{check_message}}{{/is_alert}}\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}{{#is_alert_recovery}}\n- ***Duration*** : {{triggered_duration_sec}}{{{{raw}}}} seconds{{{{/raw}}}}{{/is_alert_recovery}}\n- ***Notification Channel*** : \n${var.noti_channel}"
+  message             = "- ***Target*** : {{host.name}}({{host.ip}})\n- ***URL*** : {{instance.name}}({{url.name}})\n- ***Last*** : {{local_time 'last_triggered_at' 'Asia/Seoul'}}{{{{raw}}}}(KST){{{{/raw}}}}{{#is_alert_recovery}}\n- ***Duration*** : {{triggered_duration_sec}}{{{{raw}}}} seconds{{{{/raw}}}}{{/is_alert_recovery}}\n- ***Notification Channel*** : \n${var.noti_channel}"
   priority            = 2
 }
 
